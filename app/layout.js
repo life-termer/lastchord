@@ -1,5 +1,16 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import "@/app/_styles/globals.css";
+import { Roboto } from "next/font/google";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "@/app/theme";
+
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +31,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
       >
-        {children}
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
