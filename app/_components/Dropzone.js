@@ -15,16 +15,16 @@ const baseStyle = {
   height: "100%",
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
+  borderColor: "var(--color-slate-300)",
   borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
+  backgroundImage: "var(--background-grd-2)",
+  color: "var(--color-slate-600)",
   outline: "none",
   transition: "border .24s ease-in-out",
 };
 
 const focusedStyle = {
-  borderColor: "#eeeeee",
+  borderColor: "var(--color-slate-400)",
 };
 
 const acceptStyle = {
@@ -35,21 +35,19 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-function Dropzone({ setFileString, setFileName, setFileSize, setFile, setNewFile }) {
+function Dropzone({
+  setFileName,
+  setFileSize,
+  setFile,
+  setNewFile,
+  setError,
+  setOpen,
+}) {
   const onDrop = useCallback((acceptedFiles) => {
-    setNewFile(true);
-    // acceptedFiles.forEach((file) => {
-    //   const reader = new FileReader();
-
-    //   reader.onabort = () => console.log("file reading was aborted");
-    //   reader.onerror = () => console.log("file reading has failed");
-    //   reader.onload = () => {
-    //     // Do whatever you want with the file contents
-    //     setFileString(reader.result);
-    //     // console.log(binaryStr);
-    //   };
-    //   reader.readAsArrayBuffer(file);
-    // });
+    if (acceptedFiles.length > 0) {
+      setNewFile(true);
+      setError("");
+    }
   }, []);
 
   const {
@@ -98,7 +96,10 @@ function Dropzone({ setFileString, setFileName, setFileSize, setFile, setNewFile
     >
       <div {...getRootProps({ style, className: "hover:cursor-pointer" })}>
         <input {...getInputProps()} />
-        <FileUploadIcon fontSize="large" className="w-[100px] text-slate-400" />
+        <FileUploadIcon
+          fontSize="large"
+          className="w-[100px] text-[var(--primary)]"
+        />
         <p className="text-lg mb-1">
           Drag 'n' drop music file here, or click to select file
         </p>

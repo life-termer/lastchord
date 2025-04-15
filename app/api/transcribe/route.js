@@ -16,12 +16,14 @@ const openai = new OpenAI({
 
 export async function POST(req) {
   try {
-
     const formData = await req.formData();
     const file = formData.get("audioFile");
 
     if (!file || typeof file === "string") {
-      return NextResponse.json({ error: "No valid file uploaded" }, { status: 400 });
+      return NextResponse.json(
+        { error: "No valid file uploaded" },
+        { status: 400 }
+      );
     }
 
     // Save the file to /tmp folder
@@ -46,6 +48,9 @@ export async function POST(req) {
     return NextResponse.json({ segments: transcription.segments });
   } catch (error) {
     console.error("❌ Transcription error:", error);
-    return NextResponse.json({ error: "Transcription failed" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Transcription failed" },
+      { status: 500 }
+    );
   }
 }

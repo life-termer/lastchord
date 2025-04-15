@@ -1,9 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import "@/app/_styles/globals.css";
+
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/app/theme";
+import "@/app/globals.css";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
