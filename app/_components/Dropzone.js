@@ -35,20 +35,21 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-function Dropzone({ setFileString, setFileName, setFileSize }) {
+function Dropzone({ setFileString, setFileName, setFileSize, setFile, setNewFile }) {
   const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader();
+    setNewFile(true);
+    // acceptedFiles.forEach((file) => {
+    //   const reader = new FileReader();
 
-      reader.onabort = () => console.log("file reading was aborted");
-      reader.onerror = () => console.log("file reading has failed");
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-        setFileString(reader.result);
-        // console.log(binaryStr);
-      };
-      reader.readAsArrayBuffer(file);
-    });
+    //   reader.onabort = () => console.log("file reading was aborted");
+    //   reader.onerror = () => console.log("file reading has failed");
+    //   reader.onload = () => {
+    //     // Do whatever you want with the file contents
+    //     setFileString(reader.result);
+    //     // console.log(binaryStr);
+    //   };
+    //   reader.readAsArrayBuffer(file);
+    // });
   }, []);
 
   const {
@@ -83,8 +84,9 @@ function Dropzone({ setFileString, setFileName, setFileSize }) {
     if (acceptedFiles.length > 0) {
       setFileName(acceptedFiles[0]?.name);
       setFileSize(acceptedFiles[0]?.size);
+      setFile(acceptedFiles[0]);
     }
-  }, [acceptedFiles, setFileName, setFileSize]);
+  }, [acceptedFiles, setFileName, setFileSize, setFile]);
 
   return (
     <Box

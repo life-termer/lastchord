@@ -1,15 +1,16 @@
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-function ButtonContinue() {
+function ButtonContinue({handleUpload, loading}) {
   return (
     <Button
+      onClick={handleUpload}
       variant="contained"
       size="large"
       color="primary"
       endIcon={<SendIcon />}
     >
-      Continue
+      {loading ? "Processing..." : "Upload & Transcribe"}
     </Button>
   );
 }

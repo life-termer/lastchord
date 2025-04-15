@@ -16,7 +16,9 @@
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@mui/material-nextjs": "^7.0.0",
+    "formidable": "^3.5.2",
     "next": "15.2.4",
+    "openai": "^4.94.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8"
