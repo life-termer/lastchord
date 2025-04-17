@@ -11,8 +11,16 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { Collapse, Paper } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-function Header({ setError, setLyrics, setLyricsName, loading, setLoading }) {
-  const [file, setFile] = useState("");
+function Header({
+  file,
+  setFile,
+  setError,
+  setLyrics,
+  setLyricsName,
+  loading,
+  setLoading,
+  setUploadedFile,
+}) {
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
   const [newFile, setNewFile] = useState(true);
@@ -42,11 +50,12 @@ function Header({ setError, setLyrics, setLyricsName, loading, setLoading }) {
     setLyrics(data.segments);
     setLoading(false);
     setNewFile(false);
+    setUploadedFile(file);
     setLyricsName(fileName.replace(/\.[^/.]+$/, ""));
     data.error || setOpen(false);
   };
   return (
-    <header className="w-full h-full">
+    <header className="w-full fixed top-0 left-0 z-10">
       <Paper
         elevation={3}
         square

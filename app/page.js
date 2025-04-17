@@ -7,23 +7,29 @@ import { useState } from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Header from "./_components/Header";
 import Spinner from "./_components/Spinner";
+import AudioPlayer from "./_components/AudioPlayer";
 
 export default function Home() {
+  const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [lyricsName, setLyricsName] = useState("");
   const [lyrics, setLyrics] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState("");
 
   return (
     <>
       <Header
+        file={file}
+        setFile={setFile}
         setError={setError}
         setLyrics={setLyrics}
         setLyricsName={setLyricsName}
         loading={loading}
         setLoading={setLoading}
+        setUploadedFile={setUploadedFile}
       />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" className="mt-32">
         {loading ? (
           <Spinner />
         ) : (
@@ -49,7 +55,12 @@ export default function Home() {
             )}
             {lyrics && lyrics.length > 0 ? (
               <div className="my-5">
-                <Typography
+                <AudioPlayer
+                  lyrics={lyrics}
+                  lyricsName={lyricsName}
+                  audioUrl={URL.createObjectURL(uploadedFile)}
+                />
+                {/* <Typography
                   variant="h4"
                   component="h2"
                   sx={{ mb: 2 }}
@@ -65,7 +76,7 @@ export default function Home() {
                   >
                     {seg.text}
                   </Typography>
-                ))}
+                ))} */}
               </div>
             ) : (
               lyrics && (
